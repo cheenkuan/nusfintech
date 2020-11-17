@@ -6,10 +6,7 @@ import React from 'react';
 import logo from './logo.svg';
 import * as d3 from 'd3';
 
-
 import './App.css';
-//// import { thresholdScott } from 'd3';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -18,8 +15,8 @@ class App extends React.Component {
         customer: [],
         transact: [],
         account: [],
-        sumCat: [],
-        filteredSumCat: [],
+        // sumCat: [],
+        // filteredSumCat: [],
         hover: false,
         seeTransact: false,
         seeCustomer: false,
@@ -30,34 +27,33 @@ class App extends React.Component {
       this.accountToggleClick = this.accountToggleClick.bind(this);
     }
 
- callAPIServer() {
+  callAPIServer() {
   // when component mounted, start a GET request
   // to specified URL
 //  fetch("https://f92c6b35-d121-4c8a-987b-81217155297f.mock.pstmn.io/transactions")
   fetch("http://localhost:8000/transaction/all")
-  .then(res => res.text()) // in response, return data as text  
-  .then(res => this.setState({transact: JSON.parse(res) })) // formatting the data into a class property called state
-  .catch(err => err); // if there is an error, dont stop the process, return an "error" instead
+    .then(res => res.text()) // in response, return data as text  
+    .then(res => this.setState({transact: JSON.parse(res) })) // formatting the data into a class property called state
+    .catch(err => err); // if there is an error, dont stop the process, return an "error" instead
 
 
 //  fetch("https://f92c6b35-d121-4c8a-987b-81217155297f.mock.pstmn.io/customers")
   fetch("http://localhost:8000/customer/all")
-  .then(res => res.text()) // in response, return data as text  
-  .then(res => this.setState({customer: JSON.parse(res) })) // formatting the data into a class property called state
-  .catch(err => err); // if there is an error, dont stop the process, return an "error" instead
+    .then(res => res.text()) // in response, return data as text  
+    .then(res => this.setState({customer: JSON.parse(res) })) // formatting the data into a class property called state
+    .catch(err => err); // if there is an error, dont stop the process, return an "error" instead
 
 
 //  fetch("https://f92c6b35-d121-4c8a-987b-81217155297f.mock.pstmn.io/accounts")
   fetch("http://localhost:8000/account/all")
-  .then(res => res.text()) // in response, return data as text  
-  .then(res => this.setState({account: JSON.parse(res) })) // formatting the data into a class property called state
-  .catch(err => err); // if there is an error, dont stop the process, return an "error" instead
- }
+    .then(res => res.text()) // in response, return data as text  
+    .then(res => this.setState({account: JSON.parse(res) })) // formatting the data into a class property called state
+    .catch(err => err); // if there is an error, dont stop the process, return an "error" instead
+  }
 
 
   componentDidMount() {   // react lifecycle method componentDidMount()  DO NOT MODIFY. always loaded by browser
-                        //will execute the callAPIserver() method after the component mounts.
-      this.callAPIServer();
+       this.callAPIServer();  //will execute the callAPIserver() method after the component mounts.
       //console.log(this.serverResObjArr);
   }
 
@@ -84,11 +80,8 @@ class App extends React.Component {
       return dateB - dateA;
     });
 
-    this.sumCategories();
-// eslint-disable-next-line
-    this.state.filteredSumCat = this.state.sumCat.filter( function(d) { return d.category !== "salary"} );
-
-    this.sumCatPercent();
+    // this.sumCategories();
+    // this.sumCatPercent();
     this.accPercent();
 
     this.showAccountChart();
@@ -104,24 +97,29 @@ class App extends React.Component {
       prev.set(curr.category, curr.amountInt + count);
       return prev;
     }, new Map());
-// eslint-disable-next-line
-    this.state.sumCat = [...counts].map(([category, amountInt]) => {
+
+    let sumCat = [...counts].map(([category, amountInt]) => {
       return {category, amountInt}
     });
+
+    return sumCat;
   };
   
 
+  filterSumCat() {
+    let filteredSumCat = this.sumCategories().filter( function(d) { return d.category !== "salary"} );
 
-  sumCatPercent() {
-    var totalExp = this.state.filteredSumCat.reduce(
+    var totalExp = filteredSumCat.reduce(
       (accumulator, currentValue) => accumulator + currentValue.amountInt, 0
     );
 
-    this.state.filteredSumCat.forEach( function(d) {
+    filteredSumCat.forEach( function(d) {
       d.percent = (d.amountInt / totalExp * 100).toFixed(1);
     });
+
+    return filteredSumCat;
   };
- 
+
 
   accPercent() {
     this.state.account.forEach( function(d) {
@@ -137,8 +135,6 @@ class App extends React.Component {
     });
   };
  
-
-
   /* Replace the table with paragraph below if you need paragraph
     <p className="App-intro">{JSON.stringify(this.state.data)}</p>
   */
@@ -192,6 +188,7 @@ class App extends React.Component {
       .call(d3.axisLeft(y));
   };
 
+
   showAccountPie (){
     var width = 450;
     var height = 450;
@@ -221,7 +218,6 @@ class App extends React.Component {
     //radius for the label      
     var label = d3.arc()
           .outerRadius(radius-200).innerRadius(radius-20);
-
           
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     var arc = g.selectAll(".arc")
@@ -244,11 +240,7 @@ class App extends React.Component {
             .attr("text-anchor", "middle")
             .attr("alignment-baseline", "middle")
             .style("font-size","20px");
-            
-            
-        
-};
-
+  };
 
 
   showTransactionChart() {
@@ -263,18 +255,17 @@ class App extends React.Component {
   
     svg.selectAll("*").remove();
 
-    var maxY = Math.ceil (d3.max(this.state.sumCat.map(details => Number(details.amountInt))) / 500) * 500;
+    let sumCat = this.sumCategories();
+    var maxY = Math.ceil (d3.max(sumCat.map(details => Number(details.amountInt))) / 500) * 500;
     
     var x = d3.scaleBand().range([0, width]);
     var y = d3.scaleLinear().domain([0, maxY]).range([height, 0]);
     
-    x.domain(this.state.sumCat.map(details => details.category));
+    x.domain(sumCat.map(details => details.category));
     y.domain([0, maxY]);
     
-
-
     svg.selectAll(".bar")
-      .data(this.state.sumCat)
+      .data(sumCat)
       .enter()
       .append("rect")
       .attr("class", "bar")
@@ -285,7 +276,7 @@ class App extends React.Component {
       .attr("fill", "#df5252"); 
 
     svg.selectAll("text.bar")
-      .data(this.state.sumCat)
+      .data(sumCat)
       .enter()
       .append("text")
       .attr("class", "bar")
@@ -301,8 +292,6 @@ class App extends React.Component {
     svg.append("g")
       .call(d3.axisLeft(y));
   };
-
-
 
 
   showTransactionPie() { 
@@ -335,10 +324,11 @@ class App extends React.Component {
     var label = d3.arc()
           .outerRadius(radius-200).innerRadius(radius-20);
 
-          
+    let filteredSumCat = this.filterSumCat();
+
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     var arc = g.selectAll(".arc")
-            .data(pie(this.state.filteredSumCat))
+            .data(pie(filteredSumCat))
             .enter()
             .append("g")
             .attr("class", "arc");
@@ -350,21 +340,15 @@ class App extends React.Component {
         arc.append("text")
     
             .attr("transform", function(d) { 
-              var midAngle = d.endAngle < Math.PI ? d.startAngle/2 + d.endAngle/2 : d.startAngle/2  + d.endAngle/2 + Math.PI ;
-              return "translate(" + label.centroid(d)[0] + "," + label.centroid(d)[1] + ") rotate(-90) rotate(" + (midAngle * 180/Math.PI) + ")"; })
-            .data(this.state.filteredSumCat) 
+              var midAngle = d.endAngle < Math.PI ? d.startAngle/2 + d.endAngle/2 : d.startAngle/2  + d.endAngle/2 + Math.PI;
+              return "translate(" + label.centroid(d)[0] + "," + label.centroid(d)[1] + ") rotate(-90) rotate(" + (midAngle * 180/Math.PI) + ")"; 
+            })
+            .data(filteredSumCat) 
             .text(function(d) { return d.category + " " + d.percent + "%";})
             .attr("text-anchor", "middle")
             .attr("alignment-baseline", "middle")
             .style("font-size","20px")
-            
-            ;
-
-        
-
   };
-
-
 
 
 transactToggleClick() {
