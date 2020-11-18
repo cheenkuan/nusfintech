@@ -1,3 +1,14 @@
+# Developing Dockerize App from NUSFinTech course
+
+### Build the docker image
+`$ docker build -t ck_khngjx_nusapp .`  
+
+### run the image in a container
+* run in interactive mode from specified port
+`docker run -it -p 3000:3000 ck_khngjx_nusapp npm start`
+  
+  
+  
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
