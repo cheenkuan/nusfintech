@@ -30,22 +30,22 @@ class App extends React.Component {
   callAPIServer() {
   // when component mounted, start a GET request
   // to specified URL
-//  fetch("https://f92c6b35-d121-4c8a-987b-81217155297f.mock.pstmn.io/transactions")
-  fetch("http://localhost:8000/transaction/all")
+ fetch("https://f92c6b35-d121-4c8a-987b-81217155297f.mock.pstmn.io/transactions")
+  // fetch("http://localhost:8000/transaction/all")
     .then(res => res.text()) // in response, return data as text  
     .then(res => this.setState({transact: JSON.parse(res) })) // formatting the data into a class property called state
     .catch(err => err); // if there is an error, dont stop the process, return an "error" instead
 
 
-//  fetch("https://f92c6b35-d121-4c8a-987b-81217155297f.mock.pstmn.io/customers")
-  fetch("http://localhost:8000/customer/all")
+ fetch("https://f92c6b35-d121-4c8a-987b-81217155297f.mock.pstmn.io/customers")
+  // fetch("http://localhost:8000/customer/all")
     .then(res => res.text()) // in response, return data as text  
     .then(res => this.setState({customer: JSON.parse(res) })) // formatting the data into a class property called state
     .catch(err => err); // if there is an error, dont stop the process, return an "error" instead
 
 
-//  fetch("https://f92c6b35-d121-4c8a-987b-81217155297f.mock.pstmn.io/accounts")
-  fetch("http://localhost:8000/account/all")
+ fetch("https://f92c6b35-d121-4c8a-987b-81217155297f.mock.pstmn.io/accounts")
+  // fetch("http://localhost:8000/account/all")
     .then(res => res.text()) // in response, return data as text  
     .then(res => this.setState({account: JSON.parse(res) })) // formatting the data into a class property called state
     .catch(err => err); // if there is an error, dont stop the process, return an "error" instead
