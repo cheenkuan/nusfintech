@@ -3,9 +3,12 @@
 ### Build the docker image
 `$ docker build -t ck_khngjx_nusapp .`  
 
-### run the image in a container
+### Run the image in a container
 * run in interactive mode from specified port  
 `docker run -it -p 3000:3000 ck_khngjx_nusapp npm start`
+
+### Run the image called from Docker Hub repository
+`docker run -it -p 3000:3000 cheenkuan/ck_khngjx_nusapp npm start`  
   
   
   
