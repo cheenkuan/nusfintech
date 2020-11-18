@@ -7,10 +7,10 @@
 * https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
 
 ### For Mac users Open Terminal
-In the Finder, open the /Applications/Utilities folder, then double-click Terminal.  
+In the Finder ![](MacFinder.jpg), open the /Applications/Utilities folder, then double-click Terminal.  
 
 ### For Windows users Open Command Prompt
-Press Windows + S, then type cmd, click on Command Prompt  
+Press Windows ![](WindowsIcon.png) + S, then type cmd, click on Command Prompt  
 
 ## It's ok to copy-paste code phrases
 
