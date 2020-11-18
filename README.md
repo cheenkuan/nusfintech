@@ -1,5 +1,11 @@
 # Developing Dockerize App from NUSFinTech course
 
+## Resources
+* https://medium.com/codingtown/how-to-build-a-docker-image-and-run-react-application-via-docker-in-linux-f4eb1115c7c9
+* https://medium.com/better-programming/heres-how-you-can-use-docker-with-create-react-app-3ee3a972b04e
+* https://mherman.org/blog/dockerizing-a-react-app/#docker
+* https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+
 ### Build the docker image
 `$ docker build -t ck_khngjx_nusapp .`  
 
