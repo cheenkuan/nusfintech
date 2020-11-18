@@ -6,8 +6,13 @@
 * https://mherman.org/blog/dockerizing-a-react-app/#docker
 * https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
 
-## For Mac users Open Terminal
+### For Mac users Open Terminal
 In the Finder, open the /Applications/Utilities folder, then double-click Terminal.  
+
+### For Windows users Open Command Prompt
+Press Windows + S, then type cmd, click on Command Prompt  
+
+## It's ok to copy-paste code phrases
 
 ### Run the image called from Docker Hub repository
 type following command in command prompt terminal  
