@@ -6,6 +6,10 @@
 * https://mherman.org/blog/dockerizing-a-react-app/#docker
 * https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
 
+### Run the image called from Docker Hub repository
+type following command in command prompt terminal  
+`docker run -it -p 3000:3000 cheenkuan/ck_khngjx_nusapp npm start`  
+
 ### Build the docker image
 `$ docker build -t ck_khngjx_nusapp .`  
 
@@ -13,8 +17,6 @@
 * run in interactive mode from specified port  
 `docker run -it -p 3000:3000 ck_khngjx_nusapp npm start`
 
-### Run the image called from Docker Hub repository
-`docker run -it -p 3000:3000 cheenkuan/ck_khngjx_nusapp npm start`  
   
   
   
