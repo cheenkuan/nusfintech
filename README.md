@@ -6,6 +6,9 @@
 * https://mherman.org/blog/dockerizing-a-react-app/#docker
 * https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
 
+## For Mac users Open Terminal
+In the Finder, open the /Applications/Utilities folder, then double-click Terminal.  
+
 ### Run the image called from Docker Hub repository
 type following command in command prompt terminal  
 `docker run -it -p 3000:3000 cheenkuan/ck_khngjx_nusapp npm start`  
