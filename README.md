@@ -6,9 +6,22 @@
 * https://mherman.org/blog/dockerizing-a-react-app/#docker
 * https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
 
+### For Mac users, install Docker for Mac & Open Terminal
+To install Docker <img src="DockerIcon.png" width="30" height="30"/> for Mac, follow instructions at this [link](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)  
+In the Finder <img src="MacFinder.jpg" width="20" height="20"/>, open the /Applications/Utilities folder, then double-click Terminal.  
+
+### For Windows users Open Command Prompt
+To install Docker <img src="DockerIcon.png" width="30" height="30"/> for Windowns, follow instructions at this [link](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)  
+Press Windows <img src="WindowsIcon.png" width="25" height="25"/> + S, then type cmd, click on Command Prompt  
+
+## It's ok to copy-paste code phrases
+
 ### Run the image called from Docker Hub repository
 type following command in command prompt terminal  
 `docker run -it -p 3000:3000 cheenkuan/ck_khngjx_nusapp npm start`  
+in the browser url bar, type `http://localhost:3000/` and enter
+
+## Stop here if you don't want to try building the image
 
 ### Build the docker image
 `$ docker build -t ck_khngjx_nusapp .`  
